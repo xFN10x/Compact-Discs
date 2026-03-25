@@ -26,14 +26,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 
-public class StereoBlockEntity extends BaseContainerBlockEntity {
+public class BasicCDPlayerEntity extends BaseContainerBlockEntity {
     public NonNullList<ItemStack> inventory;
     private boolean playing = false;
     private ActiveCDTrackInfo currentlyPlayingInfo = new ActiveCDTrackInfo(-1, -1);
     private Integer nextTrackTime = -1;
     private Integer trackIndex = -1;
 
-    public StereoBlockEntity(BlockPos blockPos, BlockState blockState) {
+    public BasicCDPlayerEntity(BlockPos blockPos, BlockState blockState) {
         super(MusicExpandedBlockEntitys.STEREO_BENTITY, blockPos, blockState);
         inventory = NonNullList.withSize(3, ItemStack.EMPTY);
     }
@@ -80,7 +80,7 @@ public class StereoBlockEntity extends BaseContainerBlockEntity {
             return;
         if (playing)
             return;
-        List<String> songList = inventory.get(0).get(MusicExpandedItemComponents.CD_SONGS);
+        List<String> songList = inventory.getFirst().get(MusicExpandedItemComponents.CD_SONGS);
         if (songList.size() <= tracki) {
             tracki = 0;
             trackIndex = 0;
@@ -149,10 +149,10 @@ public class StereoBlockEntity extends BaseContainerBlockEntity {
         stopCurrentTrack();
     }
 
-    public static void tick(Level world, BlockPos blockPos, BlockState blockState, StereoBlockEntity entity) {
+    public static void tick(Level world, BlockPos blockPos, BlockState blockState, BasicCDPlayerEntity entity) {
         if (world.isClientSide())
             return;
-        boolean bool = !entity.inventory.get(0).isEmpty();
+        boolean bool = !entity.inventory.getFirst().isEmpty();
         if (blockState.getValue(StereoBlock.LOADED) != bool)
             world.setBlockAndUpdate(blockPos,
                     blockState.setValue(StereoBlock.LOADED, bool));
@@ -164,7 +164,7 @@ public class StereoBlockEntity extends BaseContainerBlockEntity {
         if (entity.inventory.get(0).is(MusicExpandedItems.CD)) {
             if (entity.nextTrackTime > 0) {
                 entity.nextTrackTime--;
-            } else if (entity.playing == true) {
+            } else if (entity.playing) {
                 entity.playing = false;
                 entity.nextTrack();
             }

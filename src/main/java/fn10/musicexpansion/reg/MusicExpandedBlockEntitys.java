@@ -1,8 +1,8 @@
 package fn10.musicexpansion.reg;
 
 import fn10.musicexpansion.MusicExpanded;
+import fn10.musicexpansion.blocks.entity.BasicCDPlayerEntity;
 import fn10.musicexpansion.blocks.entity.DiscBurnerBlockEntity;
-import fn10.musicexpansion.blocks.entity.StereoBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -15,8 +15,11 @@ public class MusicExpandedBlockEntitys {
     public static final BlockEntityType<DiscBurnerBlockEntity> DISC_BURNER_BENTITY = register("disc_burner_block",
             DiscBurnerBlockEntity::new, MusicExpandedBlocks.DISC_BURNER_BLOCK);
 
-            public static final BlockEntityType<StereoBlockEntity> STEREO_BENTITY = register("stereo",
-            StereoBlockEntity::new, MusicExpandedBlocks.STEREO_BLOCK);
+    public static final BlockEntityType<BasicCDPlayerEntity> STEREO_BENTITY = register("stereo",
+            BasicCDPlayerEntity::new, MusicExpandedBlocks.STEREO_BLOCK);
+
+    public static final BlockEntityType<BasicCDPlayerEntity> MONOLITH_BENTITY = register("disc_monolith",
+            BasicCDPlayerEntity::new, MusicExpandedBlocks);
 
     private static <T extends BlockEntity> BlockEntityType<T> register(
             String name,

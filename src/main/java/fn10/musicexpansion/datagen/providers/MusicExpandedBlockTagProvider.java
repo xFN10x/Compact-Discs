@@ -18,7 +18,10 @@ public class MusicExpandedBlockTagProvider extends FabricTagProvider.BlockTagPro
     @Override
     protected void addTags(Provider wrapperLookup) {
         valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE)
-            .add(MusicExpandedBlocks.DISC_BURNER_BLOCK);
+                .add(MusicExpandedBlocks.DISC_BURNER_BLOCK);
+
+        valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE)
+                .add(MusicExpandedBlocks.DISC_MONOLITH_BLOCK);
     }
 
 }

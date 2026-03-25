@@ -4,6 +4,7 @@ import com.google.common.base.Function;
 
 import fn10.musicexpansion.MusicExpanded;
 import fn10.musicexpansion.blocks.DiscBurnerBlock;
+import fn10.musicexpansion.blocks.DiscMonolithBlock;
 import fn10.musicexpansion.blocks.StereoBlock;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -13,6 +14,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class MusicExpandedBlocks {
@@ -49,6 +51,7 @@ public class MusicExpandedBlocks {
 
     public static final Block DISC_BURNER_BLOCK = register("disc_burner", DiscBurnerBlock::new, BlockBehaviour.Properties.of(), true);
     public static final Block STEREO_BLOCK = register("stereo", StereoBlock::new, BlockBehaviour.Properties.of(), true);
+    public static final Block DISC_MONOLITH_BLOCK = register("disc_monolith", DiscMonolithBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLESTONE), true);
 
     public static void init() {
 
