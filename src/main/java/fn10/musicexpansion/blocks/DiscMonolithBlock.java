@@ -24,7 +24,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jspecify.annotations.Nullable;
 
@@ -90,7 +92,10 @@ public class DiscMonolithBlock extends RotatedBaseEntityBlock {
     @Override
     protected VoxelShape getCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos,
                                            CollisionContext collisionContext) {
-        return Block.box(0d, 0d, 0d, 16d, 14d, 16d);
+        return switch (blockState.getValue(FACING)) {
+
+            default -> Shapes.join(Block.box(0d, 0d, 0d, 16d, 10d, 16d), Block.box(0d, 10d, 10d, 16d, 31d, 16d), BooleanOp.OR);
+        };
     }
 
     @Override
