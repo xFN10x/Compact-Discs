@@ -2,6 +2,7 @@ package fn10.musicexpansion.providers;
 
 import fn10.musicexpansion.MusicExpanded;
 import fn10.musicexpansion.blocks.DiscBurnerBlock;
+import fn10.musicexpansion.blocks.DiscMonolithBlock;
 import fn10.musicexpansion.blocks.StereoBlock;
 import fn10.musicexpansion.reg.MusicExpandedBlocks;
 import fn10.musicexpansion.reg.MusicExpandedItems;
@@ -122,13 +123,13 @@ public class MusicExpandedModelProvider extends FabricModelProvider {
 //#endregion
 		//#region Disc Monolith
 		MultiVariant dmnodisc = BlockModelGenerators
-				.plainVariant(Identifier.fromNamespaceAndPath(MusicExpanded.MOD_ID, "block/stereo"));
+				.plainVariant(Identifier.fromNamespaceAndPath(MusicExpanded.MOD_ID, "block/disc_monolith"));
 		MultiVariant dmplaying = BlockModelGenerators
 				.plainVariant(Identifier.fromNamespaceAndPath(MusicExpanded.MOD_ID,
-						"block/stereo_playing"));
+						"block/disc_monolith_playing"));
 		blockStateModelGenerator.blockStateOutput
 				.accept(MultiVariantGenerator.dispatch(MusicExpandedBlocks.DISC_MONOLITH_BLOCK)
-						.with(PropertyDispatch.initial(StereoBlock.FACING, StereoBlock.LOADED)
+						.with(PropertyDispatch.initial(DiscMonolithBlock.FACING, DiscMonolithBlock.LOADED)
 								/// not loaded
 								.select(Direction.NORTH, false, dmnodisc)
 								.select(Direction.EAST, false, dmnodisc
@@ -146,8 +147,8 @@ public class MusicExpandedModelProvider extends FabricModelProvider {
 								.select(Direction.WEST, true, dmplaying.with(
 										BlockModelGenerators.Y_ROT_270))
 								));
-		blockStateModelGenerator.registerSimpleItemModel(MusicExpandedBlocks.STEREO_BLOCK,
-				Identifier.fromNamespaceAndPath(MusicExpanded.MOD_ID, "block/stereo"));
+		blockStateModelGenerator.registerSimpleItemModel(MusicExpandedBlocks.DISC_MONOLITH_BLOCK,
+				Identifier.fromNamespaceAndPath(MusicExpanded.MOD_ID, "block/disc_monolith"));
 //#endregion
 	}
 

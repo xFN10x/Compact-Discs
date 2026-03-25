@@ -1,3 +1,4 @@
 // 1.21.11	-999999999-01-01T00:00:00	Compact Discs/Block Loot Tables
 6a5f74448764e0c87474821aaa3be7eed8dcb859 data/compactdiscs/loot_table/blocks/disc_burner.json
+0f0f0d29a11beed34cf9db72fe5d310953594d94 data/compactdiscs/loot_table/blocks/disc_monolith.json
 2cd686d8ff82e28c70716803d556e04c3a2c4f09 data/compactdiscs/loot_table/blocks/stereo.json

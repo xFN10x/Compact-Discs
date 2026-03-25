@@ -2,11 +2,13 @@ package fn10.musicexpansion.blocks;
 
 import java.util.Optional;
 
+import fn10.musicexpansion.blocks.entity.DiscMonolithEntity;
+import fn10.musicexpansion.blocks.entity.StereoEntity;
 import org.jspecify.annotations.Nullable;
 
 import com.mojang.serialization.MapCodec;
 
-import fn10.musicexpansion.blocks.entity.BasicCDPlayerEntity;
+import fn10.musicexpansion.blocks.entity.base.BasicCDPlayerEntity;
 import fn10.musicexpansion.reg.MusicExpandedBlockEntitys;
 import fn10.musicexpansion.reg.MusicExpandedItems;
 import net.minecraft.core.BlockPos;
@@ -38,18 +40,23 @@ public class StereoBlock extends RotatedBaseEntityBlock {
     public StereoBlock(Properties properties) {
         super(properties.noOcclusion());
         registerDefaultState(
-                defaultBlockState().setValue(FACING, Direction.NORTH).setValue(LOADED, false).setValue(PLAYING, false));
+                defaultBlockState().trySetValue(FACING, Direction.NORTH).trySetValue(LOADED, false).trySetValue(PLAYING, false));
+    }
+
+    public StereoBlock(Properties properties, BlockState defaultState) {
+        super(properties.noOcclusion());
+        registerDefaultState(defaultState);
     }
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos arg0, BlockState arg1) {
-        return new BasicCDPlayerEntity(arg0, arg1);
+        return new StereoEntity(arg0, arg1);
     }
 
     @Override
     public InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player,
             BlockHitResult blockHitResult) {
-        Optional<BasicCDPlayerEntity> entity = level.getBlockEntity(blockPos,
+        Optional<StereoEntity> entity = level.getBlockEntity(blockPos,
                 MusicExpandedBlockEntitys.STEREO_BENTITY);
         BasicCDPlayerEntity realEntity = entity.get();
         if (player.isCrouching()) {
@@ -63,9 +70,9 @@ public class StereoBlock extends RotatedBaseEntityBlock {
     @Override
     public InteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos,
             Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
-        Optional<BasicCDPlayerEntity> entity = level.getBlockEntity(blockPos,
+        Optional<StereoEntity> entity = level.getBlockEntity(blockPos,
                 MusicExpandedBlockEntitys.STEREO_BENTITY);
-        BasicCDPlayerEntity realEntity = entity.get();
+        StereoEntity realEntity = entity.get();
         if (itemStack.is(MusicExpandedItems.CD) && realEntity.inventory.get(0).isEmpty()) {
             realEntity.putInCD(itemStack.consumeAndReturn(1, player));
             return InteractionResult.CONSUME;
@@ -75,7 +82,7 @@ public class StereoBlock extends RotatedBaseEntityBlock {
 
     @Override
     public BlockState getBaseStateForPlacement(BlockPlaceContext blockPlaceContext) {
-        return defaultBlockState().setValue(LOADED, false).setValue(PLAYING, false);
+        return defaultBlockState().trySetValue(LOADED, false).trySetValue(PLAYING, false);
     }
 
     @Override
@@ -104,7 +111,7 @@ public class StereoBlock extends RotatedBaseEntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state,
             BlockEntityType<T> type) {
-        return createTickerHelper(type, MusicExpandedBlockEntitys.STEREO_BENTITY, BasicCDPlayerEntity::tick);
+        return createTickerHelper(type, MusicExpandedBlockEntitys.STEREO_BENTITY, StereoEntity::tick);
     }
 
 }

@@ -1,4 +1,4 @@
-package fn10.musicexpansion.blocks.entity;
+package fn10.musicexpansion.blocks.entity.base;
 
 import java.util.List;
 
@@ -6,7 +6,6 @@ import fn10.musicexpansion.blocks.StereoBlock;
 import fn10.musicexpansion.music.ActiveCDTrackInfo;
 import fn10.musicexpansion.music.CDTrack;
 import fn10.musicexpansion.music.CDTracks;
-import fn10.musicexpansion.reg.MusicExpandedBlockEntitys;
 import fn10.musicexpansion.reg.MusicExpandedItemComponents;
 import fn10.musicexpansion.reg.MusicExpandedItems;
 import net.minecraft.core.BlockPos;
@@ -22,19 +21,20 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 
 public class BasicCDPlayerEntity extends BaseContainerBlockEntity {
     public NonNullList<ItemStack> inventory;
-    private boolean playing = false;
-    private ActiveCDTrackInfo currentlyPlayingInfo = new ActiveCDTrackInfo(-1, -1);
-    private Integer nextTrackTime = -1;
-    private Integer trackIndex = -1;
+    protected boolean playing = false;
+    protected ActiveCDTrackInfo currentlyPlayingInfo = new ActiveCDTrackInfo(-1, -1);
+    protected Integer nextTrackTime = -1;
+    protected Integer trackIndex = -1;
 
-    public BasicCDPlayerEntity(BlockPos blockPos, BlockState blockState) {
-        super(MusicExpandedBlockEntitys.STEREO_BENTITY, blockPos, blockState);
+    protected BasicCDPlayerEntity(BlockPos blockPos, BlockState blockState, BlockEntityType<?> bet) {
+        super(bet, blockPos, blockState);
         inventory = NonNullList.withSize(3, ItemStack.EMPTY);
     }
 
@@ -98,8 +98,7 @@ public class BasicCDPlayerEntity extends BaseContainerBlockEntity {
 
     @Override
     protected AbstractContainerMenu createMenu(int i, Inventory inventory) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createMenu'");
+        return null;
     }
 
     @Override
@@ -147,27 +146,5 @@ public class BasicCDPlayerEntity extends BaseContainerBlockEntity {
     public void setRemoved() {
         super.setRemoved();
         stopCurrentTrack();
-    }
-
-    public static void tick(Level world, BlockPos blockPos, BlockState blockState, BasicCDPlayerEntity entity) {
-        if (world.isClientSide())
-            return;
-        boolean bool = !entity.inventory.getFirst().isEmpty();
-        if (blockState.getValue(StereoBlock.LOADED) != bool)
-            world.setBlockAndUpdate(blockPos,
-                    blockState.setValue(StereoBlock.LOADED, bool));
-
-        if (blockState.getValue(StereoBlock.PLAYING) != entity.playing)
-            world.setBlockAndUpdate(blockPos,
-                    blockState.setValue(StereoBlock.PLAYING, entity.playing));
-
-        if (entity.inventory.get(0).is(MusicExpandedItems.CD)) {
-            if (entity.nextTrackTime > 0) {
-                entity.nextTrackTime--;
-            } else if (entity.playing) {
-                entity.playing = false;
-                entity.nextTrack();
-            }
-        }
     }
 }

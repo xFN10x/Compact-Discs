@@ -1,5 +1,6 @@
 {
   "values": [
-    "compactdiscs:disc_burner"
+    "compactdiscs:disc_burner",
+    "compactdiscs:disc_monolith"
   ]
 }
