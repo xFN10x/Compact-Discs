@@ -91,7 +91,12 @@ public class DiscMonolithBlock extends RotatedBaseEntityBlock {
     protected VoxelShape getCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos,
                                            CollisionContext collisionContext) {
         return switch (blockState.getValue(FACING)) {
-
+            case Direction.SOUTH ->
+                    Shapes.join(Block.box(0d, 0d, 0d, 16d, 10d, 16d), Block.box(0d, 10d, 0d, 16d, 31d, 6d), BooleanOp.OR);
+            case Direction.EAST ->
+                    Shapes.join(Block.box(0d, 0d, 0d, 16d, 10d, 16d), Block.box(0d, 10d, 0d, 6d, 31d, 10d), BooleanOp.OR);
+            case Direction.WEST ->
+                    Shapes.join(Block.box(0d, 0d, 0d, 16d, 10d, 16d), Block.box(10d, 10d, 0d, 16d, 31d, 16d), BooleanOp.OR);
             default ->
                     Shapes.join(Block.box(0d, 0d, 0d, 16d, 10d, 16d), Block.box(0d, 10d, 10d, 16d, 31d, 16d), BooleanOp.OR);
         };
