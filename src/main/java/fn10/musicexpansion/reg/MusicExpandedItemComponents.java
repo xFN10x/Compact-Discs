@@ -16,6 +16,11 @@ public class MusicExpandedItemComponents {
             Identifier.fromNamespaceAndPath(MusicExpanded.MOD_ID, "cd_songs"),
             DataComponentType.<List<String>>builder().persistent(Codec.list(Codec.STRING)).build());
 
+    public static final DataComponentType<Boolean> CD_WRITEABLE = Registry.register(
+            BuiltInRegistries.DATA_COMPONENT_TYPE,
+            Identifier.fromNamespaceAndPath(MusicExpanded.MOD_ID, "cd_writeable"),
+            DataComponentType.<Boolean>builder().persistent(Codec.BOOL).build());
+
     public static void init() {
     }
 }

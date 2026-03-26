@@ -30,7 +30,8 @@ public class MusicExpandedTranslationProviderEN extends FabricLanguageProvider {
         translationBuilder.add("itemGroup.compactdiscs", "Compact Discs");
         
         translationBuilder.add("text.cd.tooltip.nosongs", "No Songs");
-        translationBuilder.add("text.cd.tooltip.cdrw", "CD-RW");
+        translationBuilder.add("text.cd.tooltip.writable", "CD-RW");
+        translationBuilder.add("text.cd.tooltip.notwritable", "CD-R");
 
         translationBuilder.add("subtitle.compactdiscs.block.discburner", "Disc Burner Starts...");
 

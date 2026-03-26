@@ -2,8 +2,6 @@ package fn10.musicexpansion.blocks;
 
 import com.mojang.serialization.MapCodec;
 import fn10.musicexpansion.blocks.entity.DiscMonolithEntity;
-import fn10.musicexpansion.blocks.entity.StereoEntity;
-import fn10.musicexpansion.blocks.entity.base.BasicCDPlayerEntity;
 import fn10.musicexpansion.reg.MusicExpandedBlockEntitys;
 import fn10.musicexpansion.reg.MusicExpandedItems;
 import net.minecraft.core.BlockPos;
@@ -94,7 +92,8 @@ public class DiscMonolithBlock extends RotatedBaseEntityBlock {
                                            CollisionContext collisionContext) {
         return switch (blockState.getValue(FACING)) {
 
-            default -> Shapes.join(Block.box(0d, 0d, 0d, 16d, 10d, 16d), Block.box(0d, 10d, 10d, 16d, 31d, 16d), BooleanOp.OR);
+            default ->
+                    Shapes.join(Block.box(0d, 0d, 0d, 16d, 10d, 16d), Block.box(0d, 10d, 10d, 16d, 31d, 16d), BooleanOp.OR);
         };
     }
 
@@ -104,10 +103,10 @@ public class DiscMonolithBlock extends RotatedBaseEntityBlock {
         return getCollisionShape(blockState, blockGetter, blockPos, collisionContext);
     }
 
-//    @Nullable
-//    @Override
-//    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state,
-//                                                                  BlockEntityType<T> type) {
-//        return createTickerHelper(type, MusicExpandedBlockEntitys.MONOLITH_BENTITY, DiscMonolithEntity::tick);
-//    }
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state,
+                                                                  BlockEntityType<T> type) {
+        return createTickerHelper(type, MusicExpandedBlockEntitys.MONOLITH_BENTITY, DiscMonolithEntity::tick);
+    }
 }

@@ -6,6 +6,7 @@ import fn10.musicexpansion.items.CompactDiscItem;
 import fn10.musicexpansion.menu.DiscBurnerMenu;
 import fn10.musicexpansion.reg.MusicExpandedAudio;
 import fn10.musicexpansion.reg.MusicExpandedBlockEntitys;
+import fn10.musicexpansion.reg.MusicExpandedItemComponents;
 import fn10.musicexpansion.reg.MusicExpandedItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -141,7 +142,7 @@ public class DiscBurnerBlockEntity extends BaseContainerBlockEntity {
             }
         }
         if ((input1.is(MusicExpandedItems.CD) || input2.is(MusicExpandedItems.CD))
-                && input0.is(MusicExpandedItems.CD)) {
+                && input0.is(MusicExpandedItems.CD) && input0.getOrDefault(MusicExpandedItemComponents.CD_WRITEABLE, false)) {
             if (!entity.isBurning) {
                 entity.burnTime = 700;
                 entity.burningCurrently.set(0, input1);

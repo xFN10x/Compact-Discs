@@ -11,6 +11,6 @@
   "song.compactdiscs.c418.13": "C418 - 13",
   "song.compactdiscs.c418.cat": "C418 - Cat",
   "subtitle.compactdiscs.block.discburner": "Disc Burner Starts...",
-  "text.cd.tooltip.cdrw": "CD-RW",
+  "text.cd.tooltip.writable": "CD-RW",
   "text.cd.tooltip.nosongs": "No Songs"
 }

@@ -26,6 +26,7 @@ public class MusicExpandedCommands {
             ItemStack exampleDisc1 = makeExampleDisc(CDTracks.getIdFromTrack(song1));
             ItemStack exampleDisc2 = makeExampleDisc(CDTracks.getIdFromTrack(song2));
             ItemStack exampleDisc3 = makeExampleDisc(CDTracks.getIdFromTrack(song3));
+            exampleDisc3.set(MusicExpandedItemComponents.CD_WRITEABLE, true);
 
             inventory.add(exampleDisc1);
             inventory.add(exampleDisc2);

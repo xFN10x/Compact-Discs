@@ -6,6 +6,7 @@ import java.util.List;
 import fn10.musicexpansion.music.CDTrack;
 import fn10.musicexpansion.music.CDTracks;
 import fn10.musicexpansion.reg.MusicExpandedItemComponents;
+import fn10.musicexpansion.reg.MusicExpandedItems;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.Item;
@@ -16,6 +17,10 @@ public class CompactDiscItem extends Item {
 
     public CompactDiscItem(Properties properties) {
         super(properties);
+    }
+
+    public static boolean isWriteable(ItemStack stack) {
+        return stack.is(MusicExpandedItems.CD) && stack.getOrDefault(MusicExpandedItemComponents.CD_WRITEABLE, false);
     }
 
     public static MutableComponent addToFront(String string, Component comp) {
@@ -50,7 +55,7 @@ public class CompactDiscItem extends Item {
     public static List<Component> getTooltip(TooltipContext context, ItemStack stack, TooltipFlag flags) {
         ArrayList<Component> list = new ArrayList<>();
         if (stack.has(MusicExpandedItemComponents.CD_SONGS)) {
-            list.add(Component.translatable("text.cd.tooltip.cdrw").withColor(0xAAAAAA));
+            list.add(stack.getOrDefault(MusicExpandedItemComponents.CD_WRITEABLE, false) ? Component.translatable("text.cd.tooltip.writable").withColor(0xAAAAAA) : Component.translatable("text.cd.tooltip.notwritable").withColor(0xAAAAAA));
             for (String song : stack.get(MusicExpandedItemComponents.CD_SONGS)) {
                 CDTrack track = CDTracks.getTrackFromId(song);
                 list.add(addToFront("- ", track.getTranslation()).withColor(0xAAAAAA));
