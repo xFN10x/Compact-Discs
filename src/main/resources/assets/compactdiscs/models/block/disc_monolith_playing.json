@@ -5,7 +5,7 @@
 	"textures": {
 		"7": "compactdiscs:block/disc_monolith",
 		"ani": "compactdiscs:block/disc_ani",
-		"particle": "minecraft:block/smooth_stone"
+		"particle": "block/cobblestone"
 	},
 	"elements": [
 		{
@@ -310,9 +310,9 @@
 			}
 		},
 		{
-			"from": [-0.25, 31.4, 7],
-			"to": [15.75, 31.4, 17],
-			"rotation": {"angle": 0, "axis": "y", "origin": [-0.25, 27.4, 13]},
+			"from": [-0.25, 31.5, 7],
+			"to": [15.75, 31.5, 17],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-0.25, 27.5, 13]},
 			"faces": {
 				"north": {"uv": [0, 0, 4, 0], "texture": "#7", "tintindex": 0},
 				"east": {"uv": [8, 5.5, 12, 2.75], "texture": "#7", "tintindex": 0},

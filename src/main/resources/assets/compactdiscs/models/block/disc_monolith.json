@@ -4,7 +4,7 @@
 	"texture_size": [64, 64],
 	"textures": {
 		"7": "compactdiscs:block/disc_monolith",
-		"particle": "minecraft:block/smooth_stone"
+		"particle": "minecraft:block/cobblestone"
 	},
 	"elements": [
 		{
