@@ -1,5 +1,6 @@
 package fn10.musicexpansion;
 
+import fn10.musicexpansion.reg.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -20,12 +21,6 @@ import org.slf4j.LoggerFactory;
 
 import fn10.musicexpansion.music.network.CDTrackPlayPayloadS2C;
 import fn10.musicexpansion.music.network.payload.CDTrackStopPayloadS2C;
-import fn10.musicexpansion.reg.MusicExpandedAudio;
-import fn10.musicexpansion.reg.MusicExpandedBlockEntitys;
-import fn10.musicexpansion.reg.MusicExpandedBlocks;
-import fn10.musicexpansion.reg.MusicExpandedItemComponents;
-import fn10.musicexpansion.reg.MusicExpandedItems;
-import fn10.musicexpansion.reg.MusicExpandedMenus;
 
 public class MusicExpanded implements ModInitializer {
 	public static final String MOD_ID = "compactdiscs";

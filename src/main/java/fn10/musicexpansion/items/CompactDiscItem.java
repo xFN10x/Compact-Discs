@@ -65,4 +65,14 @@ public class CompactDiscItem extends Item {
         }
         return list;
     }
+
+    public static ItemStack makeDiscStackWithTracks(CDTrack... songs) {
+        ArrayList<String> ids = new ArrayList<>();
+        for (CDTrack song : songs) {
+            ids.add(CDTracks.getIdFromTrack(song));
+        }
+        ItemStack stack = new ItemStack(MusicExpandedItems.CD);
+        stack.set(MusicExpandedItemComponents.CD_SONGS, ids);
+        return stack;
+    }
 }

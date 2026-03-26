@@ -1,5 +1,6 @@
 package fn10.musicexpansion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.mojang.brigadier.context.CommandContext;
@@ -12,6 +13,8 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 
+import static fn10.musicexpansion.items.CompactDiscItem.makeDiscStackWithTracks;
+
 public class MusicExpandedCommands {
 
     public static int giveExampleDiscs(CommandContext<CommandSourceStack> context) {
@@ -23,9 +26,9 @@ public class MusicExpandedCommands {
             CDTrack song3 = CDTracks.C418_CAT;
             //CDTrack song4 = new CDSong("dog");
 
-            ItemStack exampleDisc1 = makeExampleDisc(CDTracks.getIdFromTrack(song1));
-            ItemStack exampleDisc2 = makeExampleDisc(CDTracks.getIdFromTrack(song2));
-            ItemStack exampleDisc3 = makeExampleDisc(CDTracks.getIdFromTrack(song3));
+            ItemStack exampleDisc1 = makeDiscStackWithTracks(song1);
+            ItemStack exampleDisc2 = makeDiscStackWithTracks(song2);
+            ItemStack exampleDisc3 = makeDiscStackWithTracks(song3);
             exampleDisc3.set(MusicExpandedItemComponents.CD_WRITEABLE, true);
 
             inventory.add(exampleDisc1);
@@ -36,12 +39,6 @@ public class MusicExpandedCommands {
             e.printStackTrace();
             return 0;
         }
-    }
-
-    protected static ItemStack makeExampleDisc(String... songs) {
-        ItemStack stack = new ItemStack(MusicExpandedItems.CD);
-        stack.set(MusicExpandedItemComponents.CD_SONGS, List.of(songs));
-        return stack;
     }
 
 }
