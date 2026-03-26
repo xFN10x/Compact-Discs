@@ -24,8 +24,8 @@ public class MonolithFeature extends Feature<NoneFeatureConfiguration> {
             CompactDiscItem.makeDiscStackWithTracks(CDTracks.C418_CAT)
     ));
 
-    public MonolithFeature(Codec<NoneFeatureConfiguration> codec) {
-        super(codec);
+    public MonolithFeature() {
+        super(NoneFeatureConfiguration.CODEC);
     }
 
     @Override

@@ -65,6 +65,7 @@ public class MusicExpanded implements ModInitializer {
 		MusicExpandedMenus.init();
 		MusicExpandedItemComponents.init();
 		MusicExpandedAudio.init();
+		MusicExpandedFeatures.init();
 
 		PayloadTypeRegistry.playS2C().register(CDTrackPlayPayloadS2C.ID, CDTrackPlayPayloadS2C.CODEC);
 		PayloadTypeRegistry.playS2C().register(CDTrackStopPayloadS2C.ID, CDTrackStopPayloadS2C.CODEC);
