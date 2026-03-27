@@ -3,6 +3,7 @@ package fn10.musicexpansion.blocks;
 import com.mojang.serialization.MapCodec;
 import fn10.musicexpansion.blocks.entity.DiscMonolithEntity;
 import fn10.musicexpansion.reg.MusicExpandedBlockEntitys;
+import fn10.musicexpansion.reg.MusicExpandedBlocks;
 import fn10.musicexpansion.reg.MusicExpandedItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
