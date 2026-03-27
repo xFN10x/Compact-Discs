@@ -18,12 +18,12 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class MusicExpandedBlocks {
-    private static Block register(String name, Function<BlockBehaviour.Properties, Block> blockFactory,
+    private static <T extends Block> T register(String name, Function<BlockBehaviour.Properties, T> blockFactory,
             BlockBehaviour.Properties settings, boolean shouldRegisterItem) {
         // Create a registry key for the block
         ResourceKey<Block> blockKey = keyOfBlock(name);
         // Create the block instance
-        Block block = blockFactory.apply(settings.setId(blockKey));
+        T block = blockFactory.apply(settings.setId(blockKey));
 
         // Sometimes, you may not want to register an item for the block.
         // Eg: if it's a technical block like `minecraft:moving_piston` or
@@ -49,9 +49,9 @@ public class MusicExpandedBlocks {
         return ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MusicExpanded.MOD_ID, name));
     }
 
-    public static final Block DISC_BURNER_BLOCK = register("disc_burner", DiscBurnerBlock::new, BlockBehaviour.Properties.of(), true);
-    public static final Block STEREO_BLOCK = register("stereo", StereoBlock::new, BlockBehaviour.Properties.of(), true);
-    public static final Block DISC_MONOLITH_BLOCK = register("disc_monolith", DiscMonolithBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLESTONE), true);
+    public static final DiscBurnerBlock DISC_BURNER_BLOCK = register("disc_burner", DiscBurnerBlock::new, BlockBehaviour.Properties.of(), true);
+    public static final StereoBlock STEREO_BLOCK = register("stereo", StereoBlock::new, BlockBehaviour.Properties.of(), true);
+    public static final DiscMonolithBlock DISC_MONOLITH_BLOCK = register("disc_monolith", DiscMonolithBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLESTONE), true);
 
     public static void init() {
 
