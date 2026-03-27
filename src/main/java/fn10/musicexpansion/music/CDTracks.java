@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import java.util.random.RandomGenerator;
 
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.RandomSource;
 
 public class CDTracks {
 
@@ -47,7 +48,7 @@ public class CDTracks {
     }
 
     public static Integer createNewCDTrackId() {
-        Integer canadite = Random.from(RandomGenerator.getDefault()).nextInt(0, Integer.MAX_VALUE);
+        Integer canadite = RandomSource.create().nextInt(0, Integer.MAX_VALUE);
         if (ACTIVE_CD_TRACKS.containsKey(canadite))
             return createNewCDTrackId();
         else
