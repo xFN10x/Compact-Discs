@@ -178,7 +178,7 @@ public class MonolithFeature extends Feature<NoneFeatureConfiguration> {
 
             ItemStack disc = randomDiscs.get(random.nextInt(randomDiscs.size() - 1));
             BlockState state = DISC_MONOLITH_BLOCK.defaultBlockState();
-            state = state.setValue(DiscMonolithBlock.FACING, getBestDirection(level.getLevel(), origin));
+            state = state.setValue(DiscMonolithBlock.FACING, getBestDirection(level.getLevel(), origin).getOpposite());
 
             level.setBlock(origin, state, 3);
 
@@ -189,16 +189,23 @@ public class MonolithFeature extends Feature<NoneFeatureConfiguration> {
                         BlockState block = level.getBlockState(pos);
                         BlockState vinesState = Blocks.VINE.defaultBlockState();
 
-                        if (doesBlockHaveNeighbor(level.getLevel(), pos, true) && block.isAir() && random.nextBoolean()) {
-                            final Map<String, Boolean> blockNeighbors = getBlockNeighbors(level.getLevel(), pos);
-                            vinesState = vinesState.setValue(VineBlock.UP, blockNeighbors.get("UP"));
-                            vinesState = vinesState.setValue(VineBlock.NORTH, blockNeighbors.get("NORTH"));
-                            vinesState = vinesState.setValue(VineBlock.SOUTH, blockNeighbors.get("SOUTH"));
-                            vinesState = vinesState.setValue(VineBlock.EAST, blockNeighbors.get("EAST"));
-                            vinesState = vinesState.setValue(VineBlock.WEST, blockNeighbors.get("WEST"));
+                        if (random.nextBoolean()) {
+                            if (block.is(Blocks.COBBLESTONE)) {
+                                level.setBlock(pos, Blocks.MOSSY_COBBLESTONE.defaultBlockState(), 3);
+                            } else if (block.is(Blocks.STONE_BRICKS)) {
+                                level.setBlock(pos, Blocks.STONE_BRICKS.defaultBlockState(), 3);
+                            }
+                            else if (doesBlockHaveNeighbor(level.getLevel(), pos, true) && block.isAir()) {
+                                final Map<String, Boolean> blockNeighbors = getBlockNeighbors(level.getLevel(), pos);
+                                vinesState = vinesState.setValue(VineBlock.UP, blockNeighbors.get("UP"));
+                                vinesState = vinesState.setValue(VineBlock.NORTH, blockNeighbors.get("NORTH"));
+                                vinesState = vinesState.setValue(VineBlock.SOUTH, blockNeighbors.get("SOUTH"));
+                                vinesState = vinesState.setValue(VineBlock.EAST, blockNeighbors.get("EAST"));
+                                vinesState = vinesState.setValue(VineBlock.WEST, blockNeighbors.get("WEST"));
 
-                            //level.getLevel().updateNeighboursOnBlockSet(pos, vinesState);
-                            level.setBlock(pos, vinesState, 3);
+                                //level.getLevel().updateNeighboursOnBlockSet(pos, vinesState);
+                                level.setBlock(pos, vinesState, 3);
+                            }
                         }
                     }
                 }
