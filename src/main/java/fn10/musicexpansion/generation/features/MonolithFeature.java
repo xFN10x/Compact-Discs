@@ -1,9 +1,11 @@
 package fn10.musicexpansion.generation.features;
 
 import fn10.musicexpansion.MusicExpanded;
+import fn10.musicexpansion.blocks.DiscMonolithBlock;
 import fn10.musicexpansion.items.CompactDiscItem;
 import fn10.musicexpansion.music.CDTracks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -34,6 +36,65 @@ public class MonolithFeature extends Feature<NoneFeatureConfiguration> {
         super(NoneFeatureConfiguration.CODEC);
     }
 
+    public Direction getBestDirection(Level level, BlockPos pos) {
+        int nCount = 0;
+        int sCount = 0;
+        int eCount = 0;
+        int wCount = 0;
+
+        final BlockPos n0 = pos.north();
+        final BlockPos n1 = n0.above();
+
+        final BlockPos s0 = pos.south();
+        final BlockPos s1 = s0.above();
+
+        final BlockPos e0 = pos.east();
+        final BlockPos e1 = e0.above();
+
+        final BlockPos w0 = pos.west();
+        final BlockPos w1 = w0.above();
+
+        final BlockState n0b = level.getBlockState(n0);
+        final BlockState n1b = level.getBlockState(n1);
+
+        final BlockState s0b = level.getBlockState(s0);
+        final BlockState s1b = level.getBlockState(s1);
+
+        final BlockState e0b = level.getBlockState(e0);
+        final BlockState e1b = level.getBlockState(e1);
+
+        final BlockState w0b = level.getBlockState(w0);
+        final BlockState w1b = level.getBlockState(w1);
+
+        if (!n0b.isAir())
+            nCount++;
+        if (!n1b.isAir())
+            nCount++;
+
+        if (!s0b.isAir())
+            sCount++;
+        if (!s1b.isAir())
+            sCount++;
+
+        if (!e0b.isAir())
+            eCount++;
+        if (!e1b.isAir())
+            eCount++;
+
+        if (!w0b.isAir())
+            wCount++;
+        if (!w1b.isAir())
+            wCount++;
+
+        if (nCount > sCount)
+            return Direction.NORTH;
+        else if (sCount > eCount)
+            return Direction.SOUTH;
+        else if (eCount > wCount)
+            return Direction.EAST;
+        else
+            return Direction.WEST;
+    }
 
     public boolean doesBlockHaveNeighbor(Level level, BlockPos pos, boolean ignoreDown) {
         BlockState Tblock = level.getBlockState(pos.above());
@@ -115,11 +176,11 @@ public class MonolithFeature extends Feature<NoneFeatureConfiguration> {
                 if (!block.isAir()) return false;
             }
 
-            ItemStack disc = randomDiscs.get(random.nextInt(randomDiscs.size()));
+            ItemStack disc = randomDiscs.get(random.nextInt(randomDiscs.size() - 1));
             BlockState state = DISC_MONOLITH_BLOCK.defaultBlockState();
+            state = state.setValue(DiscMonolithBlock.FACING, getBestDirection(level.getLevel(), origin));
 
-            level.getLevel().updateNeighboursOnBlockSet(origin, state);
-            level.getLevel().setBlockAndUpdate(origin, state);
+            level.setBlock(origin, state, 3);
 
             for (int x = -3; x < 3; x++) {
                 for (int z = -3; z < 3; z++) {
@@ -143,7 +204,7 @@ public class MonolithFeature extends Feature<NoneFeatureConfiguration> {
                 }
             }
 
-            //DISC_MONOLITH_BLOCK.useItemOn(disc, state, level.getLevel(), origin, null, null, null);
+            DISC_MONOLITH_BLOCK.useItemOn(disc, state, level.getLevel(), origin, null, null, null);
 
             return true;
         } catch (Exception e) {
