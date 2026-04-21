@@ -8,6 +8,7 @@ import fn10.musicexpansion.music.CDTracks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.WorldGenLevel;
@@ -16,6 +17,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
@@ -30,9 +33,15 @@ import static fn10.musicexpansion.reg.MusicExpandedBlocks.DISC_MONOLITH_BLOCK;
 public class MonolithFeature extends Feature<NoneFeatureConfiguration> {
 
     public static final ArrayList<ItemStack> randomDiscs = new ArrayList<>(List.of(
-            CompactDiscItem.makeDiscStackWithTracks(CDTracks.C418_13),
-            CompactDiscItem.makeDiscStackWithTracks(CDTracks.C418_11),
-            CompactDiscItem.makeDiscStackWithTracks(CDTracks.C418_CAT)
+            CompactDiscItem.makeDiscStackWithTracks(CDTracks.getTrackFromId("13")),
+            CompactDiscItem.makeDiscStackWithTracks(CDTracks.getTrackFromId("11")),
+            CompactDiscItem.makeDiscStackWithTracks(CDTracks.getTrackFromId("blocks")),
+            CompactDiscItem.makeDiscStackWithTracks(CDTracks.getTrackFromId("relic")),
+            CompactDiscItem.makeDiscStackWithTracks(CDTracks.getTrackFromId("otherside")),
+            CompactDiscItem.makeDiscStackWithTracks(CDTracks.getTrackFromId("stal")),
+            CompactDiscItem.makeDiscStackWithTracks(CDTracks.getTrackFromId("wait")),
+            CompactDiscItem.makeDiscStackWithTracks(CDTracks.getTrackFromId("5")),
+            CompactDiscItem.makeDiscStackWithTracks(CDTracks.getTrackFromId("cat"))
     ));
 
     public MonolithFeature() {

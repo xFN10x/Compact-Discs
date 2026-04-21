@@ -26,22 +26,27 @@ public class CDTrack {
     /**
      * Plays this track in the given level and pos. This then sends packets to all
      * clients.
-     * 
+     *
      * @param level The level this is happening in.
      * @param pos   The position this track should play
      * @return An Either, with left being the id of this playing track, and right
-     *         being the length of this track. The ID is used for keeping track of
-     *         playing tracks on both client and server.
+     * being the length of this track. The ID is used for keeping track of
+     * playing tracks on both client and server.
      */
     public ActiveCDTrackInfo play(ServerLevel level, BlockPos pos) {
         return play(level, pos, true);
     }
-        public ActiveCDTrackInfo play(ServerLevel level, BlockPos pos, boolean showNowPlaying) {
+
+    public Integer getLength() {
+        return length;
+    }
+
+    public ActiveCDTrackInfo play(ServerLevel level, BlockPos pos, boolean showNowPlaying) {
         if (currentId != -1)
             stop(level);
         try {
             Integer id = CDTracks.createNewCDTrackId();
-            for (ServerPlayer plr : ((ServerLevel) level).players()) {
+            for (ServerPlayer plr : level.players()) {
                 CDTrackPlayPayloadS2C payload = new CDTrackPlayPayloadS2C(pos, Holder.direct(event),
                         id, translation, showNowPlaying);
                 ServerPlayNetworking.send(plr, payload);
@@ -57,7 +62,7 @@ public class CDTrack {
 
     public void stop(ServerLevel level) {
         CDTracks.ACTIVE_CD_TRACKS.remove(currentId);
-        for (ServerPlayer plr : ((ServerLevel) level).players()) {
+        for (ServerPlayer plr : level.players()) {
             CDTrackStopPayloadS2C payload = new CDTrackStopPayloadS2C(currentId);
             ServerPlayNetworking.send(plr, payload);
         }

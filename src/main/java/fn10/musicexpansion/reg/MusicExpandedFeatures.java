@@ -40,8 +40,13 @@ public class MusicExpandedFeatures {
     public static final List<PlacementModifier> MONOLITH_FEATURE_PLACED_MODFIIERS = List.of(
             CountPlacement.of(1),
             BiomeFilter.biome(),
+            RarityFilter.onAverageOnceEvery(2),
             InSquarePlacement.spread(),
-            HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.absolute(5), VerticalAnchor.absolute(50))));
+            HeightRangePlacement.of(
+                    TrapezoidHeight.of(
+                            VerticalAnchor.absolute(5),
+                            VerticalAnchor.absolute(50))));
+
     public static final ResourceKey<PlacedFeature> MONOLITH_FEATURE_PLACED = regPlacement("monolith_cave_placed");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MONOLITH_FEATURE_CONFIGURED = regConfig("monolith_cave");
     public static final MonolithFeature MONOLITH_FEATURE = regFeature("monolith", new MonolithFeature());

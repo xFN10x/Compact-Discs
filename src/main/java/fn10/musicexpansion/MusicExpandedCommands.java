@@ -21,9 +21,9 @@ public class MusicExpandedCommands {
         try {
             Inventory inventory = context.getSource().getPlayer().getInventory();
 
-            CDTrack song1 = CDTracks.C418_11;
-            CDTrack song2 = CDTracks.C418_13;
-            CDTrack song3 = CDTracks.C418_CAT;
+            CDTrack song1 = CDTracks.getTrackFromId("cat");
+            CDTrack song2 = CDTracks.getTrackFromId("11");
+            CDTrack song3 = CDTracks.getTrackFromId("13");
             //CDTrack song4 = new CDSong("dog");
 
             ItemStack exampleDisc1 = makeDiscStackWithTracks(song1);

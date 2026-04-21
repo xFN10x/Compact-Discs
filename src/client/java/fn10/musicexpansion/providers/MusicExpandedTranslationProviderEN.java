@@ -35,9 +35,32 @@ public class MusicExpandedTranslationProviderEN extends FabricLanguageProvider {
 
         translationBuilder.add("subtitle.compactdiscs.block.discburner", "Disc Burner Starts...");
 
-        translationBuilder.add("song.compactdiscs.c418.cat", "C418 - Cat");
         translationBuilder.add("song.compactdiscs.c418.13", "C418 - 13");
+        translationBuilder.add("song.compactdiscs.c418.cat", "C418 - cat");
+        translationBuilder.add("song.compactdiscs.c418.blocks", "C418 - blocks");
+        translationBuilder.add("song.compactdiscs.c418.chirp", "C418 - chirp");
+        translationBuilder.add("song.compactdiscs.c418.far", "C418 - far");
+        translationBuilder.add("song.compactdiscs.c418.mall", "C418 - mall");
+        translationBuilder.add("song.compactdiscs.c418.mellohi", "C418 - mellohi");
+        translationBuilder.add("song.compactdiscs.c418.stal", "C418 - stal");
+        translationBuilder.add("song.compactdiscs.c418.strad", "C418 - strad");
+        translationBuilder.add("song.compactdiscs.c418.ward", "C418 - ward");
         translationBuilder.add("song.compactdiscs.c418.11", "C418 - 11");
+        translationBuilder.add("song.compactdiscs.c418.wait", "C418 - wait");
+
+        translationBuilder.add("song.compactdiscs.c418.pigstep", "Lena Raine - Pigstep");
+        translationBuilder.add("song.compactdiscs.c418.otherside", "Lena Raine - otherside");
+        translationBuilder.add("song.compactdiscs.c418.creator", "Lena Raine - Creator");
+        translationBuilder.add("song.compactdiscs.c418.creatoralt", "Lena Raine - Creator (Music Box)");
+
+        translationBuilder.add("song.compactdiscs.c418.5", "Samuel Åberg - 5");
+
+        translationBuilder.add("song.compactdiscs.c418.relic", "Aaron Cherof - Relic");
+        translationBuilder.add("song.compactdiscs.c418.precipice", "Aaron Cherof - Precipice");
+
+        translationBuilder.add("song.compactdiscs.c418.tears", "Amos Roddy - Tears");
+
+        translationBuilder.add("song.compactdiscs.c418.lavachic", "Hyper Potions - Lava Chicken");
     }
 
 }
