@@ -152,7 +152,7 @@ public class MonolithFeature extends Feature<NoneFeatureConfiguration> {
             WorldGenLevel level = featurePlaceContext.level();
             RandomSource random = featurePlaceContext.random();
 
-            if (random.nextInt(0, 100) != 5) return true;
+            //if (random.nextInt(0, 100) != 5) return true;
 
             int y = origin.getY();
             //y must be between -10 and 40

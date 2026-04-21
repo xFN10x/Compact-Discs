@@ -40,7 +40,7 @@ public class MusicExpandedFeatures {
     public static final List<PlacementModifier> MONOLITH_FEATURE_PLACED_MODFIIERS = List.of(
             CountPlacement.of(1),
             BiomeFilter.biome(),
-            RarityFilter.onAverageOnceEvery(2),
+            RarityFilter.onAverageOnceEvery(4),
             InSquarePlacement.spread(),
             HeightRangePlacement.of(
                     TrapezoidHeight.of(
