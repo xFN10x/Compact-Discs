@@ -34,13 +34,16 @@ public class CDTrack {
      *         playing tracks on both client and server.
      */
     public ActiveCDTrackInfo play(ServerLevel level, BlockPos pos) {
+        return play(level, pos, true);
+    }
+        public ActiveCDTrackInfo play(ServerLevel level, BlockPos pos, boolean showNowPlaying) {
         if (currentId != -1)
             stop(level);
         try {
             Integer id = CDTracks.createNewCDTrackId();
             for (ServerPlayer plr : ((ServerLevel) level).players()) {
                 CDTrackPlayPayloadS2C payload = new CDTrackPlayPayloadS2C(pos, Holder.direct(event),
-                        id, translation);
+                        id, translation, showNowPlaying);
                 ServerPlayNetworking.send(plr, payload);
             }
             currentId = id;

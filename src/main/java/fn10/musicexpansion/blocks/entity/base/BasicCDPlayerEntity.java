@@ -32,6 +32,7 @@ public class BasicCDPlayerEntity extends BaseContainerBlockEntity {
     protected ActiveCDTrackInfo currentlyPlayingInfo = new ActiveCDTrackInfo(-1, -1);
     protected Integer nextTrackTime = -1;
     protected Integer trackIndex = -1;
+    protected Boolean showNowPlaying = true;
 
     protected BasicCDPlayerEntity(BlockPos blockPos, BlockState blockState, BlockEntityType<?> bet) {
         super(bet, blockPos, blockState);
@@ -88,7 +89,7 @@ public class BasicCDPlayerEntity extends BaseContainerBlockEntity {
         }
         CDTrack track = CDTracks.getTrackFromId(songList.get(tracki));
         playing = true;
-        currentlyPlayingInfo = track.play(((ServerLevel) level), worldPosition);
+        currentlyPlayingInfo = track.play(((ServerLevel) level), worldPosition, showNowPlaying);
         nextTrackTime = currentlyPlayingInfo.length();
     }
 

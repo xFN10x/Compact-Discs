@@ -11,6 +11,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -181,7 +182,7 @@ public class MonolithFeature extends Feature<NoneFeatureConfiguration> {
             for (int i = 0; i < 3; i++) {
                 BlockPos pos = origin.atY(y + i);
                 BlockState block = level.getBlockState(pos);
-                if (!block.canBeReplaced()) return false;
+                if (!block.canBeReplaced() || block.is(Blocks.WATER)) return false;
             }
 
             ItemStack disc = randomDiscs.get(random.nextInt(randomDiscs.size() - 1));
