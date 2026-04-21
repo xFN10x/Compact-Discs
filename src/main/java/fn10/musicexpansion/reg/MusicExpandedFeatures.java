@@ -8,11 +8,15 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.levelgen.heightproviders.TrapezoidHeight;
+import net.minecraft.world.level.levelgen.placement.*;
+
+import java.util.List;
 
 public class MusicExpandedFeatures {
 
@@ -21,11 +25,24 @@ public class MusicExpandedFeatures {
                 Identifier.fromNamespaceAndPath(MusicExpanded.MOD_ID, id));
     }
 
-    //taken from the feature class
-    public static <C extends FeatureConfiguration, F extends Feature<C>> F regFeature(String string, F feature) {
-        return (F)(Registry.register(BuiltInRegistries.FEATURE, string, feature));
+    public static ResourceKey<PlacedFeature> regPlacement(String id) {
+        return ResourceKey.create(
+                Registries.PLACED_FEATURE,
+                Identifier.fromNamespaceAndPath(MusicExpanded.MOD_ID, id)
+        );
     }
 
+    //taken from the feature class
+    public static <C extends FeatureConfiguration, F extends Feature<C>> F regFeature(String string, F feature) {
+        return Registry.register(BuiltInRegistries.FEATURE, string, feature);
+    }
+
+    public static final List<PlacementModifier> MONOLITH_FEATURE_PLACED_MODFIIERS = List.of(
+            CountPlacement.of(1),
+            BiomeFilter.biome(),
+            InSquarePlacement.spread(),
+            HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.absolute(5), VerticalAnchor.absolute(50))));
+    public static final ResourceKey<PlacedFeature> MONOLITH_FEATURE_PLACED = regPlacement("monolith_cave_placed");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MONOLITH_FEATURE_CONFIGURED = regConfig("monolith_cave");
     public static final MonolithFeature MONOLITH_FEATURE = regFeature("monolith", new MonolithFeature());
 
@@ -37,7 +54,13 @@ public class MusicExpandedFeatures {
     }
 
     public static void placed(BootstrapContext<PlacedFeature> bootstrapContext) {
+        bootstrapContext.register(MONOLITH_FEATURE_PLACED,
+                new PlacedFeature(
+                        bootstrapContext.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(MONOLITH_FEATURE_CONFIGURED),
+                        MONOLITH_FEATURE_PLACED_MODFIIERS
+                ));
     }
 
-    public static void init() {}
+    public static void init() {
+    }
 }

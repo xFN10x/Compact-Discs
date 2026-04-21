@@ -1,7 +1,11 @@
 package fn10.musicexpansion;
 
+import fn10.musicexpansion.music.network.CDTrackPlayPayloadS2C;
+import fn10.musicexpansion.music.network.payload.CDTrackStopPayloadS2C;
 import fn10.musicexpansion.reg.*;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -15,59 +19,60 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.permissions.Permissions;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-
+import net.minecraft.world.level.levelgen.GenerationStep;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fn10.musicexpansion.music.network.CDTrackPlayPayloadS2C;
-import fn10.musicexpansion.music.network.payload.CDTrackStopPayloadS2C;
-
 public class MusicExpanded implements ModInitializer {
-	public static final String MOD_ID = "compactdiscs";
+    public static final String MOD_ID = "compactdiscs";
 
-	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-	public static final ResourceKey<CreativeModeTab> CD_ITEM_GROUP_KEY = ResourceKey.create(
-			BuiltInRegistries.CREATIVE_MODE_TAB.key(),
-			Identifier.fromNamespaceAndPath(MOD_ID, "item_group"));
-	public static final CreativeModeTab COMPACTDISCS_ITEM_GROUP = FabricItemGroup.builder()
-			.icon(() -> new ItemStack(MusicExpandedItems.CD))
-			.title(Component.translatable("itemGroup.compactdiscs"))
-			.build();
+    public static final ResourceKey<CreativeModeTab> CD_ITEM_GROUP_KEY = ResourceKey.create(
+            BuiltInRegistries.CREATIVE_MODE_TAB.key(),
+            Identifier.fromNamespaceAndPath(MOD_ID, "item_group"));
+    public static final CreativeModeTab COMPACTDISCS_ITEM_GROUP = FabricItemGroup.builder()
+            .icon(() -> new ItemStack(MusicExpandedItems.CD))
+            .title(Component.translatable("itemGroup.compactdiscs"))
+            .build();
 
-	@Override
-	public void onInitialize() {
+    @Override
+    public void onInitialize() {
 
-		// Register the group.
-		Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, CD_ITEM_GROUP_KEY, COMPACTDISCS_ITEM_GROUP);
+        // Register the group.
+        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, CD_ITEM_GROUP_KEY, COMPACTDISCS_ITEM_GROUP);
 
-		// Register items to the custom item group.
-		ItemGroupEvents.modifyEntriesEvent(CD_ITEM_GROUP_KEY).register(itemGroup -> {
-			itemGroup.accept(MusicExpandedItems.CD);
-			itemGroup.accept(MusicExpandedItems.GLASS_DUST);
-			itemGroup.accept(MusicExpandedBlocks.DISC_BURNER_BLOCK);
-			itemGroup.accept(MusicExpandedBlocks.STEREO_BLOCK);
-			itemGroup.accept(MusicExpandedBlocks.DISC_MONOLITH_BLOCK);
-		});
+        // Register items to the custom item group.
+        ItemGroupEvents.modifyEntriesEvent(CD_ITEM_GROUP_KEY).register(itemGroup -> {
+            itemGroup.accept(MusicExpandedItems.CD);
+            itemGroup.accept(MusicExpandedItems.GLASS_DUST);
+            itemGroup.accept(MusicExpandedBlocks.DISC_BURNER_BLOCK);
+            itemGroup.accept(MusicExpandedBlocks.STEREO_BLOCK);
+            itemGroup.accept(MusicExpandedBlocks.DISC_MONOLITH_BLOCK);
+        });
 
-		CommandRegistrationCallback.EVENT.register((dis, reg, enviro) -> {
-			dis.register(Commands.literal("compactdiscs")
-					.then(
-							Commands.literal("give_example_discs")
-									.requires(source -> source.permissions()
-											.hasPermission(Permissions.COMMANDS_MODERATOR))
-									.executes(MusicExpandedCommands::giveExampleDiscs)));
-		});
+        CommandRegistrationCallback.EVENT.register((dis, reg, enviro) -> {
+            dis.register(Commands.literal("compactdiscs")
+                    .then(
+                            Commands.literal("give_example_discs")
+                                    .requires(source -> source.permissions()
+                                            .hasPermission(Permissions.COMMANDS_MODERATOR))
+                                    .executes(MusicExpandedCommands::giveExampleDiscs)));
+        });
 
-		MusicExpandedItems.init();
-		MusicExpandedBlockEntitys.init();
-		MusicExpandedBlocks.init();
-		MusicExpandedMenus.init();
-		MusicExpandedItemComponents.init();
-		MusicExpandedAudio.init();
-		MusicExpandedFeatures.init();
+        MusicExpandedItems.init();
+        MusicExpandedBlockEntitys.init();
+        MusicExpandedBlocks.init();
+        MusicExpandedMenus.init();
+        MusicExpandedItemComponents.init();
+        MusicExpandedAudio.init();
+        MusicExpandedFeatures.init();
 
-		PayloadTypeRegistry.playS2C().register(CDTrackPlayPayloadS2C.ID, CDTrackPlayPayloadS2C.CODEC);
-		PayloadTypeRegistry.playS2C().register(CDTrackStopPayloadS2C.ID, CDTrackStopPayloadS2C.CODEC);
-	}
+        BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(),
+                GenerationStep.Decoration.UNDERGROUND_DECORATION,
+                MusicExpandedFeatures.MONOLITH_FEATURE_PLACED);
+
+        PayloadTypeRegistry.playS2C().register(CDTrackPlayPayloadS2C.ID, CDTrackPlayPayloadS2C.CODEC);
+        PayloadTypeRegistry.playS2C().register(CDTrackStopPayloadS2C.ID, CDTrackStopPayloadS2C.CODEC);
+    }
 }

@@ -51,6 +51,7 @@ public class BasicCDPlayerEntity extends BaseContainerBlockEntity {
     }
 
     public void stopCurrentTrack() {
+        if (!(level instanceof ServerLevel)) return;
         CDTrack track = CDTracks.getCDTrackFromPlayingID(currentlyPlayingInfo.id());
         if (track == null) return;
         track.stop(((ServerLevel) level));

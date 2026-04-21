@@ -1,5 +1,6 @@
 package fn10.musicexpansion.blocks.entity;
 
+import fn10.musicexpansion.MusicExpanded;
 import fn10.musicexpansion.blocks.DiscMonolithBlock;
 import fn10.musicexpansion.blocks.StereoBlock;
 import fn10.musicexpansion.blocks.entity.base.BasicCDPlayerEntity;
@@ -21,7 +22,7 @@ public class DiscMonolithEntity extends BasicCDPlayerEntity {
         if (blockState.getValue(DiscMonolithBlock.LOADED) != bool)
             world.setBlockAndUpdate(blockPos,
                     blockState.setValue(DiscMonolithBlock.LOADED, bool));
-
+        MusicExpanded.LOGGER.info(String.valueOf(entity.playing));
         if (entity.inventory.getFirst().is(MusicExpandedItems.CD)) {
             if (entity.nextTrackTime > 0) {
                 entity.nextTrackTime--;
