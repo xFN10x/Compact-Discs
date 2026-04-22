@@ -1,8 +1,6 @@
 package fn10.musicexpansion.blocks.entity;
 
-import fn10.musicexpansion.MusicExpanded;
 import fn10.musicexpansion.blocks.DiscMonolithBlock;
-import fn10.musicexpansion.blocks.StereoBlock;
 import fn10.musicexpansion.blocks.entity.base.BasicCDPlayerEntity;
 import fn10.musicexpansion.reg.MusicExpandedBlockEntitys;
 import fn10.musicexpansion.reg.MusicExpandedItems;

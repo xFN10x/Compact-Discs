@@ -10,6 +10,7 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 
 public class MusicExpandedRecipeProvider extends FabricRecipeProvider {
 
@@ -33,6 +34,28 @@ public class MusicExpandedRecipeProvider extends FabricRecipeProvider {
                         .pattern("AA")
                         .define(Character.valueOf('A'), MusicExpandedItemTagProvider.GLASS)
                         .unlockedBy(getHasName(Items.GLASS), has(MusicExpandedItemTagProvider.GLASS))
+                        .save(exporter);
+
+                shaped(RecipeCategory.MISC, MusicExpandedItems.REDSTONE_LAZER)
+                        .pattern("GRG")
+                        .pattern("ARA")
+                        .pattern("AAA")
+                        .define(Character.valueOf('A'), Blocks.SMOOTH_STONE)
+                        .define(Character.valueOf('R'), Items.REDSTONE)
+                        .define(Character.valueOf('G'), MusicExpandedItems.GLASS_DUST)
+                        .unlockedBy(getHasName(Items.REDSTONE), has(Items.REDSTONE))
+                        .unlockedBy(getHasName(MusicExpandedItems.GLASS_DUST), has(MusicExpandedItems.GLASS_DUST))
+                        .save(exporter);
+
+                shaped(RecipeCategory.MISC, MusicExpandedItems.DIAMOND_LAZER)
+                        .pattern("GRG")
+                        .pattern("ARA")
+                        .pattern("AAA")
+                        .define(Character.valueOf('A'), Blocks.SMOOTH_STONE)
+                        .define(Character.valueOf('R'), Items.DIAMOND)
+                        .define(Character.valueOf('G'), MusicExpandedItems.GLASS_DUST)
+                        .unlockedBy(getHasName(Items.REDSTONE), has(Items.REDSTONE))
+                        .unlockedBy(getHasName(MusicExpandedItems.GLASS_DUST), has(MusicExpandedItems.GLASS_DUST))
                         .save(exporter);
             }
 

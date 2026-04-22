@@ -3,6 +3,7 @@ package fn10.musicexpansion.reg;
 import com.google.common.base.Function;
 
 import fn10.musicexpansion.MusicExpanded;
+import fn10.musicexpansion.items.CompactDiscItem;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -24,7 +25,10 @@ public class MusicExpandedItems {
     }
 
     public static final Item GLASS_DUST = register("glass_dust", Item::new, new Item.Properties().fireResistant());
-    public static final Item CD = register("compact_disc", Item::new, new Item.Properties().stacksTo(1));
+    public static final Item REDSTONE_LAZER = register("redstone_lazer", Item::new, new Item.Properties());
+    public static final Item DIAMOND_LAZER = register("diamond_lazer", Item::new, new Item.Properties());
+
+    public static final Item CD = register("compact_disc", CompactDiscItem::new, new Item.Properties().stacksTo(1));
 
     public static void init() {
 

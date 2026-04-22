@@ -19,6 +19,8 @@ public class MusicExpandedTranslationProviderEN extends FabricLanguageProvider {
     public void generateTranslations(Provider registryLookup, TranslationBuilder translationBuilder) {
         translationBuilder.add(MusicExpandedItems.GLASS_DUST, "Glass Dust");
         translationBuilder.add(MusicExpandedItems.CD, "Compact-Disc");
+        translationBuilder.add(MusicExpandedItems.DIAMOND_LAZER, "Diamond Lazer");
+        translationBuilder.add(MusicExpandedItems.REDSTONE_LAZER, "Redstone Lazer");
 
         translationBuilder.add(MusicExpandedBlocks.DISC_BURNER_BLOCK, "Disc Burner");
         translationBuilder.add(MusicExpandedBlocks.STEREO_BLOCK, "Stereo");

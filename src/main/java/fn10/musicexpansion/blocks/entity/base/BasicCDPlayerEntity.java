@@ -39,6 +39,12 @@ public class BasicCDPlayerEntity extends BaseContainerBlockEntity {
         inventory = NonNullList.withSize(3, ItemStack.EMPTY);
     }
 
+    public boolean isPlaying() {return playing;}
+
+    public ActiveCDTrackInfo currentPlaying() {return currentlyPlayingInfo;}
+
+    public int getNextTrackTime() {return nextTrackTime;}
+
     public void ejectCD() {
         if (!(level instanceof ServerLevel))
             return;

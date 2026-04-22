@@ -1,12 +1,14 @@
 package fn10.musicexpansion.blocks;
 
+import com.google.gson.Gson;
 import com.mojang.serialization.MapCodec;
 import fn10.musicexpansion.blocks.entity.DiscMonolithEntity;
 import fn10.musicexpansion.reg.MusicExpandedBlockEntitys;
-import fn10.musicexpansion.reg.MusicExpandedBlocks;
 import fn10.musicexpansion.reg.MusicExpandedItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -28,6 +30,7 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 import java.util.Optional;
@@ -51,12 +54,16 @@ public class DiscMonolithBlock extends RotatedBaseEntityBlock {
     }
 
     @Override
-    public InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player,
-                                            BlockHitResult blockHitResult) {
+    public @NonNull InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player,
+                                                     BlockHitResult blockHitResult) {
+        if (!(level instanceof ServerLevel)) return InteractionResult.PASS;
         Optional<DiscMonolithEntity> entity = level.getBlockEntity(blockPos,
                 MusicExpandedBlockEntitys.MONOLITH_BENTITY);
         DiscMonolithEntity realEntity = entity.get();
         if (player.isCrouching()) {
+//            ((ServerLevel) level).getServer().sendSystemMessage(Component.literal(String.valueOf(realEntity.isPlaying())));
+//            ((ServerLevel) level).getServer().sendSystemMessage(Component.literal(new Gson().toJson(realEntity.currentPlaying())));
+//            ((ServerLevel) level).getServer().sendSystemMessage(Component.literal(new Gson().toJson(realEntity.getNextTrackTime())));
             realEntity.nextTrack();
         } else {
             realEntity.ejectCD();
@@ -67,6 +74,7 @@ public class DiscMonolithBlock extends RotatedBaseEntityBlock {
     @Override
     public InteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos,
                                        Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        if (!(level instanceof ServerLevel)) return InteractionResult.PASS;
         Optional<DiscMonolithEntity> entity = level.getBlockEntity(blockPos,
                 MusicExpandedBlockEntitys.MONOLITH_BENTITY);
         DiscMonolithEntity realEntity = entity.get();

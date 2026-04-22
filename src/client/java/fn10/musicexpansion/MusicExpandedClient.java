@@ -41,8 +41,18 @@ public class MusicExpandedClient implements ClientModInitializer {
 
             TRACK_INSTANCES.put(payload.id(), instance);
         });
+
         ClientPlayNetworking.registerGlobalReceiver(CDTrackStopPayloadS2C.ID, (payload, contxt) -> {
             Minecraft client = contxt.client();
+            if (payload.id() == -1) {
+                TRACK_INSTANCES.forEach((k,v) -> {
+                    if (v == null)
+                        return;
+                    client.getSoundManager().stop(v);
+                });
+                TRACK_INSTANCES.clear();
+                return;
+            }
             SoundInstance sInstance = TRACK_INSTANCES.get(payload.id());
             if (sInstance == null)
                 return;

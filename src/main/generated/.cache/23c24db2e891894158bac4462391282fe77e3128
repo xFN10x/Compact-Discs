@@ -1,3 +1,7 @@
 // 1.21.11	-999999999-01-01T00:00:00	Compact Discs/MusicExpandedRecipeProvider
+e143d62addb4eda696de2cb80462f1657d3d324b data/compactdiscs/advancement/recipes/misc/diamond_lazer.json
 585b2cffb7547a9fe42a897cf442cf93abd2cca2 data/compactdiscs/advancement/recipes/misc/glass_dust.json
+1951b8d93abce387a877ed58ebaa31be51ac9ba7 data/compactdiscs/advancement/recipes/misc/redstone_lazer.json
+5e89bdc5a6e62119e13cbf7a1b9142315db9c2e4 data/compactdiscs/recipe/diamond_lazer.json
 57f4a414ca712a67b53db47b35e8f0e22444dc8c data/compactdiscs/recipe/glass_dust.json
+3bf6fa88483bb859fe556c77a140a61bd9325eae data/compactdiscs/recipe/redstone_lazer.json

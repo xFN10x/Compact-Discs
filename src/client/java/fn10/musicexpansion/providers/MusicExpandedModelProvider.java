@@ -155,6 +155,8 @@ public class MusicExpandedModelProvider extends FabricModelProvider {
 	@Override
 	public void generateItemModels(ItemModelGenerators itemModelGenerator) {
 		itemModelGenerator.generateFlatItem(MusicExpandedItems.GLASS_DUST, ModelTemplates.FLAT_ITEM);
+		itemModelGenerator.generateFlatItem(MusicExpandedItems.DIAMOND_LAZER, ModelTemplates.FLAT_ITEM);
+		itemModelGenerator.generateFlatItem(MusicExpandedItems.REDSTONE_LAZER, ModelTemplates.FLAT_ITEM);
 		itemModelGenerator.generateFlatItem(MusicExpandedItems.CD, ModelTemplates.FLAT_ITEM);
 	}
 

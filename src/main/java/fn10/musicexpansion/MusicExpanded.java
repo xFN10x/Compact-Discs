@@ -46,6 +46,9 @@ public class MusicExpanded implements ModInitializer {
         ItemGroupEvents.modifyEntriesEvent(CD_ITEM_GROUP_KEY).register(itemGroup -> {
             itemGroup.accept(MusicExpandedItems.CD);
             itemGroup.accept(MusicExpandedItems.GLASS_DUST);
+            itemGroup.accept(MusicExpandedItems.REDSTONE_LAZER);
+            itemGroup.accept(MusicExpandedItems.DIAMOND_LAZER);
+
             itemGroup.accept(MusicExpandedBlocks.DISC_BURNER_BLOCK);
             itemGroup.accept(MusicExpandedBlocks.STEREO_BLOCK);
             itemGroup.accept(MusicExpandedBlocks.DISC_MONOLITH_BLOCK);
