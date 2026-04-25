@@ -44,7 +44,11 @@ public class MusicExpanded implements ModInitializer {
 
         // Register items to the custom item group.
         ItemGroupEvents.modifyEntriesEvent(CD_ITEM_GROUP_KEY).register(itemGroup -> {
-            itemGroup.accept(MusicExpandedItems.CD);
+            final ItemStack cdrw = new ItemStack(MusicExpandedItems.CD);
+            cdrw.set(MusicExpandedItemComponents.CD_WRITEABLE, true);
+            final ItemStack cdr = new ItemStack(MusicExpandedItems.CD);
+            itemGroup.accept(cdrw);
+            itemGroup.accept(cdr);
             itemGroup.accept(MusicExpandedItems.GLASS_DUST);
             itemGroup.accept(MusicExpandedItems.REDSTONE_LAZER);
             itemGroup.accept(MusicExpandedItems.DIAMOND_LAZER);

@@ -16,7 +16,7 @@ import net.minecraft.world.item.TooltipFlag;
 public class CompactDiscItem extends Item {
 
     public CompactDiscItem(Properties properties) {
-        super(properties);
+        super(properties.component(MusicExpandedItemComponents.CD_WRITEABLE, false));
     }
 
     public static boolean isWriteable(ItemStack stack) {
@@ -54,8 +54,8 @@ public class CompactDiscItem extends Item {
 
     public static List<Component> getTooltip(TooltipContext context, ItemStack stack, TooltipFlag flags) {
         ArrayList<Component> list = new ArrayList<>();
+        list.add(stack.getOrDefault(MusicExpandedItemComponents.CD_WRITEABLE, false) ? Component.translatable("text.cd.tooltip.writable").withColor(0xAAAAAA) : Component.translatable("text.cd.tooltip.notwritable").withColor(0xAAAAAA));
         if (stack.has(MusicExpandedItemComponents.CD_SONGS)) {
-            list.add(stack.getOrDefault(MusicExpandedItemComponents.CD_WRITEABLE, false) ? Component.translatable("text.cd.tooltip.writable").withColor(0xAAAAAA) : Component.translatable("text.cd.tooltip.notwritable").withColor(0xAAAAAA));
             for (String song : stack.get(MusicExpandedItemComponents.CD_SONGS)) {
                 CDTrack track = CDTracks.getTrackFromId(song);
                 list.add(addToFront("- ", track.getTranslation()).withColor(0xAAAAAA));

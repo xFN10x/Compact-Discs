@@ -234,11 +234,11 @@ public class MonolithFeature extends Feature<NoneFeatureConfiguration> {
                 }
             }
 
-            for (int i = 0; i < 100; i++) {
-                BlockPos pos = origin.above(i + 5);
-                BlockState block = Blocks.GLASS.defaultBlockState();
-                level.setBlock(pos, block, 3);
-            }
+//            for (int i = 0; i < 100; i++) {
+//                BlockPos pos = origin.above(i + 5);
+//                BlockState block = Blocks.GLASS.defaultBlockState();
+//                level.setBlock(pos, block, 3);
+//            }
 
             //DISC_MONOLITH_BLOCK.useItemOn(disc, state, level.getLevel(), origin, null, null, null);
 
