@@ -56,6 +56,10 @@ public class MusicExpanded implements ModInitializer {
 
         CommandRegistrationCallback.EVENT.register((dis, reg, enviro) -> {
             dis.register(Commands.literal("compactdiscs")
+                    .then(Commands.literal("give_all")
+                            .requires(src -> src.permissions().hasPermission(Permissions.COMMANDS_MODERATOR))
+                            .executes(MusicExpandedCommands::giveAllDiscs)
+                    )
                     .then(
                             Commands.literal("give_example_discs")
                                     .requires(source -> source.permissions()

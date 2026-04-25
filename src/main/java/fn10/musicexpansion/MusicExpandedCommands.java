@@ -10,6 +10,7 @@ import fn10.musicexpansion.music.CDTracks;
 import fn10.musicexpansion.reg.MusicExpandedItemComponents;
 import fn10.musicexpansion.reg.MusicExpandedItems;
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 
@@ -34,6 +35,21 @@ public class MusicExpandedCommands {
             inventory.add(exampleDisc1);
             inventory.add(exampleDisc2);
             inventory.add(exampleDisc3);
+            return 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public static int giveAllDiscs(CommandContext<CommandSourceStack> context) {
+        try {
+            final ServerPlayer plr = context.getSource().getPlayer();
+            Inventory inventory = plr.getInventory();
+
+            CDTracks.tracks.forEach((k,v) -> {
+                plr.addItem(makeDiscStackWithTracks(v));
+            });
             return 1;
         } catch (Exception e) {
             e.printStackTrace();

@@ -21,7 +21,8 @@ import java.util.List;
 public class MusicExpandedFeatures {
 
     public static ResourceKey<ConfiguredFeature<?, ?>> regConfig(String id) {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE,
+        return ResourceKey.create(
+                Registries.CONFIGURED_FEATURE,
                 Identifier.fromNamespaceAndPath(MusicExpanded.MOD_ID, id));
     }
 

@@ -11,6 +11,16 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
+    "has_glass_dust": {
+      "conditions": {
+        "items": [
+          {
+            "items": "compactdiscs:glass_dust"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "compactdiscs:glass_dust"
@@ -21,7 +31,8 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_glass"
+      "has_glass",
+      "has_glass_dust"
     ]
   ],
   "rewards": {

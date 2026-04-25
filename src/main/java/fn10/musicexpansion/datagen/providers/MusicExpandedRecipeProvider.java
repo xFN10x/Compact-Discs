@@ -99,7 +99,7 @@ public class MusicExpandedRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy(getHasName(Blocks.VINE), has(Blocks.VINE))
                         .unlockedBy(getHasName(MusicExpandedBlocks.DISC_MONOLITH_BLOCK), has(MusicExpandedBlocks.DISC_MONOLITH_BLOCK))
                         .unlockedBy(getHasName(MusicExpandedItems.REDSTONE_LAZER), has(MusicExpandedItems.REDSTONE_LAZER))
-                        .save(exporter);
+                        .save(exporter, "disc_mono_vines");
 
                 shaped(RecipeCategory.MISC, MusicExpandedBlocks.DISC_MONOLITH_BLOCK)
                         .pattern("SSS")
