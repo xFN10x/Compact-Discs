@@ -6,6 +6,10 @@ plugins {
 version = project.mod_version
 group = project.maven_group
 
+base {
+	archivesName = project.archives_base_name
+}
+
 repositories {
 	// Add repositories to retrieve artifacts from in here.
 	// You should only use this when depending on other mods because
@@ -24,6 +28,12 @@ loom {
 		}
 	}
 
+}
+
+fabricApi {
+	configureDataGeneration {
+		client = true
+	}
 }
 
 dependencies {
@@ -60,10 +70,10 @@ java {
 }
 
 jar {
-	inputs.property "projectName", project.name
+	inputs.property "archivesName", project.base.archivesName
 
 	from("LICENSE") {
-		rename { "${it}_${project.name}"}
+		rename { "${it}_${inputs.properties.archivesName}"}
 	}
 }
 
@@ -71,6 +81,7 @@ jar {
 publishing {
 	publications {
 		create("mavenJava", MavenPublication) {
+			artifactId = project.archives_base_name
 			from components.java
 		}
 	}
