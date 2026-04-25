@@ -62,7 +62,7 @@ public class DiscBurnerMenu extends AbstractContainerMenu {
         }
 
         public boolean mayPlace(ItemStack itemStack) {
-            return itemStack.is(MusicExpandedItems.CD) && (needsMusic ? itemStack.has(MusicExpandedItemComponents.CD_SONGS) : true);
+            return itemStack.is(MusicExpandedItems.CD) && (!needsMusic || itemStack.has(MusicExpandedItemComponents.CD_SONGS));
         }
 
     }

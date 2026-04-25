@@ -37,11 +37,11 @@ public abstract class RotatedBaseEntityBlock extends BaseEntityBlock {
     }
 
     protected BlockState rotate(BlockState blockState, Rotation rotation) {
-        return (BlockState) blockState.setValue(FACING, rotation.rotate((Direction) blockState.getValue(FACING)));
+        return blockState.setValue(FACING, rotation.rotate(blockState.getValue(FACING)));
     }
 
     protected BlockState mirror(BlockState blockState, Mirror mirror) {
-        return blockState.rotate(mirror.getRotation((Direction) blockState.getValue(FACING)));
+        return blockState.rotate(mirror.getRotation(blockState.getValue(FACING)));
     }
 
 }
